@@ -13,21 +13,24 @@ namespace API.Controllers
     public class FileProcessorController : ApiController
     {
         // GET: api/FileProcessor/5
-        public List<Output> Get(string filePath)
+        public List<Output> Get(string filePath, bool fromUI = true)
         {
             List<Input> lstOrders = File.ReadAllLines(filePath).Skip(1).Select(v => Input.FromCsv(v)).ToList();
-            string message = GetErrorMessage(lstOrders).ToString();
-            if (!string.IsNullOrWhiteSpace(message))
+            if(!fromUI)
             {
-                StringBuilder errorMessage = new StringBuilder("The file is rejected for the following reason(s)" + Environment.NewLine);
-                errorMessage.Append(message);
-                var response = new HttpResponseMessage(HttpStatusCode.BadRequest)
+                string message = GetErrorMessage(lstOrders).ToString();
+                if (!string.IsNullOrWhiteSpace(message))
                 {
-                    Content = new StringContent(errorMessage.ToString(), System.Text.Encoding.UTF8, "text/plain"),
-                    StatusCode = HttpStatusCode.BadRequest
-                };
-                throw new HttpResponseException(response);
-            }
+                    StringBuilder errorMessage = new StringBuilder("The file is rejected for the following reason(s)" + Environment.NewLine);
+                    errorMessage.Append(message);
+                    var response = new HttpResponseMessage(HttpStatusCode.BadRequest)
+                    {
+                        Content = new StringContent(errorMessage.ToString(), System.Text.Encoding.UTF8, "text/plain"),
+                        StatusCode = HttpStatusCode.BadRequest
+                    };
+                    throw new HttpResponseException(response);
+                }
+            }            
 
             List<Output> lstOutput = new List<Output>();
 
@@ -48,7 +51,6 @@ namespace API.Controllers
                     }
                     lstOutput.Add(output);
                 }
-
             }
             return lstOutput;
         }

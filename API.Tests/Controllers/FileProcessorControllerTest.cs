@@ -1,6 +1,5 @@
 ﻿using API.Controllers;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using System;
 using System.Net;
 using System.Web.Http;
 
@@ -17,7 +16,7 @@ namespace API.Tests.Controllers
             var controller = new FileProcessorController();
 
             // Act
-            var result = controller.Get(filePath);
+            var result = controller.Get(filePath, false);
 
             //Assert
             Assert.AreEqual(3, result.Count);
@@ -33,7 +32,7 @@ namespace API.Tests.Controllers
                 var controller = new FileProcessorController();
 
                 // Act
-                var result = controller.Get(filePath);
+                var result = controller.Get(filePath, false);
             }
             catch (HttpResponseException ex)
             {
@@ -53,7 +52,7 @@ namespace API.Tests.Controllers
                 var controller = new FileProcessorController();
 
                 // Act
-                var result = controller.Get(filePath);
+                var result = controller.Get(filePath, false);
             }
             catch (HttpResponseException ex)
             {
@@ -73,7 +72,7 @@ namespace API.Tests.Controllers
                 var controller = new FileProcessorController();
 
                 // Act
-                var result = controller.Get(filePath);
+                var result = controller.Get(filePath, false);
             }
             catch (HttpResponseException ex)
             {
@@ -93,7 +92,7 @@ namespace API.Tests.Controllers
                 var controller = new FileProcessorController();
 
                 // Act
-                var result = controller.Get(filePath);
+                var result = controller.Get(filePath, false);
             }
             catch (HttpResponseException ex)
             {
@@ -113,7 +112,7 @@ namespace API.Tests.Controllers
                 var controller = new FileProcessorController();
 
                 // Act
-                var result = controller.Get(filePath);
+                var result = controller.Get(filePath, false);
             }
             catch (HttpResponseException ex)
             {
