@@ -42,12 +42,6 @@ namespace FileProcessorUI.Controllers
             return View(lstOutput);
         }
 
-        // GET: FileProcessor/Details/5
-        public ActionResult Details(int id)
-        {
-            return View();
-        }
-
         protected List<Output> CallAPIFileProcessor(string filePath)
         {
             try
